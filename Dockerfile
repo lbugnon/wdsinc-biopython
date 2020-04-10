@@ -74,7 +74,7 @@ ENV uid=1000
 ENV gid=${uid}
 
 COPY init.sh /
-COPY test.py /
+#COPY test.py /
 COPY create_user.sh /
 COPY matplotlibrc_tkagg /
 COPY matplotlibrc_agg /
