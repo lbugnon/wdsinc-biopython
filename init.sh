@@ -9,8 +9,6 @@ else
   cp /matplotlibrc_tkagg ${MATPLOTLIBRC}
 fi
 
-#${python_env}/bin/python test.py
-
 if [ ! -z "$1" ]; then
   exec $@
 fi
