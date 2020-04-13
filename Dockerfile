@@ -34,12 +34,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       tk-dev \
       sudo \
       wget \ 
-      imagemagick && \
+      imagemagick \
+    python3-setuptools && \
     rm -rf /var/lib/apt/lists/*
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-      python3-setuptools && \
-    rm -rf /var/lib/apt/lists/*
+
+# viennarna
+# Install ViennaRNA
+RUN wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
+RUN tar -zxvf ViennaRNA-2.4.14.tar.gz
+RUN rm ViennaRNA-2.4.14.tar.gz
+RUN cd ViennaRNA-2.4.14 && ./configure && make && make install
 
 # python packages
 RUN pip3 install -U virtualenv
@@ -57,13 +62,6 @@ RUN install_python_module ipdb
 RUN install_python_module biopython
 RUN install_python_module tqdm
 
-
-# viennarna
-# Install ViennaRNA
-RUN wget https://www.tbi.univie.ac.at/RNA/download/sourcecode/2_4_x/ViennaRNA-2.4.14.tar.gz
-RUN tar -zxvf ViennaRNA-2.4.14.tar.gz
-RUN rm ViennaRNA-2.4.14.tar.gz
-RUN cd ViennaRNA-2.4.14 && ./configure && make && make install
 
 RUN ln -s ${python_env}/bin/python /usr/local/bin/python
 
